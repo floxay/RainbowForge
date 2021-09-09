@@ -32,7 +32,7 @@ namespace RainbowForge.Dump
 
 					var mesh = CompiledMeshObject.Read(assetStream, header);
 
-					DumpMeshObj(outputDirectory, $"id{entry.Uid}_type{header.MeshType}_v{header.Revision}", mesh);
+					DumpMeshObj(outputDirectory, entry.MetaData.FileName, mesh);
 
 					break;
 				}
@@ -42,7 +42,7 @@ namespace RainbowForge.Dump
 
 					var surface = texture.ReadSurfaceBytes(assetStream);
 
-					DumpTexture(outputDirectory, $"id{entry.Uid}_type{texture.TexType}", texture, surface);
+					DumpTexture(outputDirectory, entry.MetaData.FileName, texture, surface);
 
 					break;
 				}
@@ -179,8 +179,8 @@ namespace RainbowForge.Dump
 					try
 					{
 						var shader = Shader.Read(assetStream);
-						var pathVert = Path.Combine(rootDir, $"{entry.MetaData.Uid}_vert.hlsl");
-						var pathExtra = Path.Combine(rootDir, $"{entry.MetaData.Uid}_extra.hlsl");
+						var pathVert = Path.Combine(rootDir, $"{entry.MetaData.FileName}_vert.hlsl");
+						var pathExtra = Path.Combine(rootDir, $"{entry.MetaData.FileName}_extra.hlsl");
 
 						Directory.CreateDirectory(rootDir);
 						File.WriteAllText(pathVert, shader.Vert);

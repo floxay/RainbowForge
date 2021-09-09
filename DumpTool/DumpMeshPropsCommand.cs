@@ -61,7 +61,7 @@ namespace DumpTool
 			{
 				var unresolvedExterns = new List<KeyValuePair<string, ulong>>();
 
-				var outputDir = Path.Combine(rootOutputDir, $"model_flatarchive_id{entry.Uid}", $"{(Magic)meshProp.MetaData.FileType}_{meshProp.MetaData.Uid}");
+				var outputDir = Path.Combine(rootOutputDir, $"{entry.MetaData.FileName}_id{entry.Uid}");
 
 				try
 				{
@@ -108,7 +108,12 @@ namespace DumpTool
 					{
 						var resolvedEntry = resolvedForge.Entries.First(entry1 => entry1.Uid == resolvedUid.Value);
 
-						DumpHelper.Dump(resolvedForge, resolvedEntry, Path.Combine(outputDir, resolvedUid.Key));
+						if (resolvedEntry.MetaData.FileName.EndsWith("_CLRTM"))
+                        {
+							continue;
+                        }
+
+						DumpHelper.Dump(resolvedForge, resolvedEntry, Path.Combine(outputDir));
 
 						Console.WriteLine($"Dumped {resolvedForgeFile}/{resolvedUid.Value}");
 					}
