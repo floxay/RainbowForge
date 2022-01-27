@@ -48,8 +48,9 @@ namespace RainbowForge.Core.Container
 			return assetDeserializerType switch
 			{
 				3 => ChunkedDataBlock.Read(r),
-				13 => ChunkedDataBlock.Read(r, true),
 				7 => FlatDataBlock.Read(r, entry),
+				13 => ChunkedDataBlock.Read(r, true),
+				14 => ChunkedDataBlock.Read(r, true),
 				_ => throw new NotImplementedException()
 			};
 		}

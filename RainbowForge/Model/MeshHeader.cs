@@ -63,6 +63,13 @@ namespace RainbowForge.Model
 			var dataStart = r.BaseStream.Position; // inner model zero byte
 
 			var x00 = r.ReadUInt32(); // [0x0] = 0x14
+
+			#region HYPER SCAPE
+			var unk1HS = r.ReadUInt32();
+			var unk2HS = r.ReadUInt32();
+			var unk3HS = r.ReadUInt32();
+			#endregion
+
 			var revision = r.ReadUInt32(); // [0x4] = 0, 1, 2
 			var vertLen = r.ReadUInt32(); // [0x8] how much bytes are allocated
 
